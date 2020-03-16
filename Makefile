@@ -20,6 +20,18 @@ proxupdate.Rout: proxupdate.R
 ### Negative log likelihood
 nloglik.Rout: nloglik.R
 
+### Proximal gradient
+gradient.Rout: gradient.R
+
+### Other helper functions
+helperfuns.Rout: helperfuns.R
+
+### Penalized cox frame
+pencox.Rout: pencox.R
+
+### Example
+examples.Rout: examples.R
+
 
 ######################################################################
 
