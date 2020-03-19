@@ -6,7 +6,7 @@ current: target
 ######################################################################
 
 ms = makestuff
-Sources += $(wildcard *.R *.Rmd)
+Sources += $(wildcard *.R *.Rmd *.bib)
 Sources += Makefile rmd.mk
 
 ######################################################################
