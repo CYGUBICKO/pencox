@@ -17,7 +17,7 @@ pencox <- function(eventvar, X, alpha = 0, lambda = 1
 	if (standardise) {
 		X <- scale(X)
 		scale_mu <- attr(X, "scaled:center")
-		scale_sd <- attr(X,'scaled:scale')
+		scale_sd <- attr(X, "scaled:scale")
 	} else {
 		scale_mu <- rep(0, p)
 		scale_sd <- rep(0, p)

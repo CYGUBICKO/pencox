@@ -29,6 +29,9 @@ helperfuns.Rout: helperfuns.R
 ### Penalized cox frame
 pencox.Rout: pencox.R
 
+### Writeup
+pencox.pdf: pencox.rmd
+
 ### Example
 examples.Rout: examples.R
 
