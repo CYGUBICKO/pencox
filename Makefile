@@ -8,6 +8,7 @@ current: target
 ms = makestuff
 Sources += $(wildcard *.R *.Rmd *.bib)
 Sources += Makefile rmd.mk
+Source += pencox.pdf pencox.bib
 
 ######################################################################
 
