@@ -39,8 +39,6 @@ cv.pencox_res
 # Plot coefficients
 plot.pencox(cv.pencox_res)
 
-
-
 quit()
 ## glmnet
 timevar <- df$time

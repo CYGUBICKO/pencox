@@ -7,7 +7,7 @@ output: "pdf_document"
 bibliography: pencox.bib
 ---
 
-We describe gradient descent (proximal and accelerated) algorithms for penalised (elastic net) Cox proportional hazard model. We first discuss gradient descent methods and then implement a penalised Cox-PH model with constant covariates. We will then extend these ideas to implement penalised time-dependent Cox PH models. `coxnet` package has already implemented this model using coordinate descent algorithm but does not accommodate time varying covariates.
+We describe gradient descent (proximal and accelerated) algorithms for penalized (elastic net) Cox proportional hazard model. We first discuss gradient descent methods and then implement a penalized Cox-PH model with constant covariates. We will then extend these ideas to implement penalized time-dependent Cox PH models. `coxnet` package has already implemented this model using coordinate descent algorithm but does not accommodate time varying covariates.
 
 ## Introduction
 
@@ -97,7 +97,7 @@ shrink $\gamma = \alpha_1\gamma$. Else perform the gradient descent update
 \beta^+ = \beta - \gamma \nabla f(\beta).
 \]
 
-For a more comprehensive discussion on these methods, please @tibshirani2010proximal.
+For a more comprehensive discussion on these methods, please see @tibshirani2010proximal.
 
 ### Proximal gradient descent
 
@@ -134,9 +134,9 @@ v &= \beta^{(k-1)} + \frac{k-2}{k+1}\left(\beta^{(k-1)} - \beta^{(k-2)}\right) \
 
 $k = 1$ is simply proximal gradient update while $v$ in \ref{eq:apg1} carries some "momentum" from the previous iterations.
 
-## Penalised proximal gradient descent for a Cox PH model
+## Penalized proximal gradient descent for a Cox PH model
 
-We easily extend \ref{eq:loglike1} (and subsequently \ref{eq:logdev2}) to add the elastic net regularisation term so that the penalised log-likelihood (and subsequently the gradient function) becomes
+We easily extend \ref{eq:loglike1} (and subsequently \ref{eq:logdev2}) to add the elastic net regularization term so that the penalized log-likelihood (and subsequently the gradient function) becomes
 
 \[
 \mathrm{pen} ~ \mathit{l(\beta)_{\alpha\lambda}} = -\mathit{l(\beta)} + \lambda P(\beta)_{\alpha}
@@ -145,13 +145,13 @@ where
 \begin{align}
 \lambda P(\beta)_{\alpha} = \lambda\left(\alpha\sum_{i=1}^p|\beta_i| + 0.5(1 - \alpha)\sum_{i=1}^p\beta_i^2 \right) \label{eq:elasticnet1}
 \end{align}
-is the penalisation term. Following the result of $\partial \lambda P(\beta)_{\alpha}/\partial \beta$ by @simon2011regularization, the proximal gradient descent update becomes
+is the penalization term. Following the result of $\partial \lambda P(\beta)_{\alpha}/\partial \beta$ by @simon2011regularization, the proximal gradient descent update becomes
 
 \begin{align}
 \beta^{(k)} &= S_{\gamma\alpha\lambda}\left(\beta^{(k-1)} -\gamma\nabla \mathrm{pen} ~ \mathit{l(\beta)_{\alpha\lambda}}\right) \nonumber\\
 &= S_{\gamma\alpha\lambda}\left(\beta^{(k-1)} + \frac{\gamma}{N} \mathbf{X}^T(\delta - \mathbf{P}\delta) - \gamma\lambda(1-\alpha)\beta^{(k-1)} \right) \label{eq:pgdcox1}
 \end{align}
 
-combines $\mathit{l_1}$ (lasso) and $\mathit{l_2}$ (ridge) penalties. The lasso chooses only the nonzero coefficients. Althogh this tends to work in most applications, if two predictors are correlated, it will pick one and completely ignore the other. On the hand, ridge penalises coefficients towards zero, but not to exactly zero. Elastic net penaly, \ref{eq:elasticnet1} combines the strength of both lasso and rigde. 
+combines $\mathit{l_1}$ (lasso) and $\mathit{l_2}$ (ridge) penalties. The lasso chooses only the nonzero coefficients. Although this tends to work in most applications, if two predictors are correlated, it will pick one and completely ignore the other. On the hand, ridge penalizes coefficients towards zero, but not to exactly zero. The *elastic net* penalty (\ref{eq:elasticnet1}) combines the strength of both lasso and ridge. 
 
 ## References

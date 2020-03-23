@@ -3,14 +3,15 @@
 # already defined
 
 pencox <- function(eventvar, X, alpha = 0, lambda = 1
-	, gamma = 0.1, standardise = FALSE, maxiter = 5000, tol = 1e-8) {
+	, gamma = 0.1, standardise = FALSE, maxiter = 5000, tol = 1e-8
+        , quietly = FALSE) {
 #	y <- parseFormula(formula = formula, data = data)
 #	ynames <- colnames(y)
 #	if (!grepl("^Surv", ynames) || NCOL(y) > 1) {
 #		stop("formula: must be a survival formula. ?survival")
 #	}
-	
-	formula <- as.formula(paste0("~", colnames(X), collapse = "+"))
+
+	formula <- reformulate(colnames(X))
 	X <- model.matrix(formula, X)[,-1]
 	p <- NCOL(X)
 
@@ -62,7 +63,8 @@ pencox <- function(eventvar, X, alpha = 0, lambda = 1
 			break
 		} 
 	}
-	print(message)
+        ## generate as a message (so it can be suppressed)
+        if (!quietly) message(message)
 	beta_hat <- as.matrix(beta[,ncol(beta)])
 	colnames(beta_hat) <- "s0"
 	result <- list(beta.hat = beta_hat
