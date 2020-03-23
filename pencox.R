@@ -30,6 +30,9 @@ pencox <- function(eventvar, X, alpha = 0, lambda = 1
 	# Coefficient matrix
 	beta <- matrix(rep(NA, p*(maxiter+1)), nrow = p, dimnames = list(colnames(X)))
 
+	# Beta deviance
+	deviance <- NA
+
 	# Initialise likelihood function
 	nll0 <- nloglik(X = X, delta = eventvar, init_beta = init_beta)
 	grad0 <- gradient(nll = nll0, init_beta = init_beta, gamma = gamma, lambda = lambda, alpha = alpha)
@@ -51,9 +54,10 @@ pencox <- function(eventvar, X, alpha = 0, lambda = 1
 
 		# Check for convergence
 		concheck <- sqrt(sum((beta[,k+1] - beta[, k])^2))/gamma
+		deviance[k] <- concheck
 		if (concheck < tol) {
      		beta <- beta[, -((k+2):ncol(beta))]
-
+			
 			message <- sprintf("Model converged after %i iterations", (k+1))
 			break
 		} 
@@ -61,5 +65,13 @@ pencox <- function(eventvar, X, alpha = 0, lambda = 1
 	print(message)
 	beta_hat <- as.matrix(beta[,ncol(beta)])
 	colnames(beta_hat) <- "s0"
-	return("beta_hat" = beta_hat)
+	result <- list(beta.hat = beta_hat
+		, lambda = lambda
+		, alpha = alpha
+		, min.deviance = concheck
+		, deviance = deviance
+		, beta = beta
+		, convergence = message
+	)
+	return(result)
 }

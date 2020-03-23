@@ -4,6 +4,8 @@ library(microbenchmark)
 library(dplyr)
 library(glmnet)
 library(survival)
+library(doMC)
+registerDoMC()
 
 library(ggplot2)
 
@@ -11,6 +13,8 @@ source("proxupdate.R")
 source("nloglik.R")
 source("gradient.R")
 source("pencox.R")
+source("cv.pencox.R")
+source("plot.pencox.R")
 
 df <- veteran
 
@@ -27,7 +31,17 @@ X <- (df
 )
 pencox_res <- pencox(eventvar, X, gamma = 0.1, alpha = 0.5, lambda = 0.5, standardise = TRUE)
 pencox_res
+## CV
+lambda <- exp(seq(0, -7, length.out = 100))
+cv.pencox_res <- cv.pencox(eventvar, X, gamma = 0.1, alpha = 1, lambda = lambda, standardise = TRUE)
+cv.pencox_res
 
+# Plot coefficients
+plot.pencox(cv.pencox_res)
+
+
+
+quit()
 ## glmnet
 timevar <- df$time
 y <- Surv(time = timevar, event = eventvar)

@@ -6,7 +6,7 @@ current: target
 ######################################################################
 
 ms = makestuff
-Sources += $(wildcard *.R *.Rmd *.bib)
+Sources += $(wildcard *.R *.rmd *.bib)
 Sources += Makefile rmd.mk
 Source += pencox.pdf pencox.bib
 
@@ -29,6 +29,12 @@ helperfuns.Rout: helperfuns.R
 
 ### Penalized cox frame
 pencox.Rout: pencox.R
+
+### CV but still trying to figure out the objective function
+cv.pencox.Rout: cv.pencox.R
+
+### Plot coefficient estimates
+plot.pencox.Rout: plot.pencox.R
 
 ### Writeup
 pencox.pdf: pencox.rmd
