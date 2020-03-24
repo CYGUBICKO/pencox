@@ -74,6 +74,8 @@ pencox <- function(eventvar, X, alpha = 0, lambda = 1
 		, deviance = deviance
 		, beta = beta
 		, convergence = message
+		, delta = eventvar
+		, Xmatrix = X
 	)
 	return(result)
 }

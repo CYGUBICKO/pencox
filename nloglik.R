@@ -10,6 +10,7 @@ nloglik <- function(X, delta, init_beta) {
         ##   I don't know of any easy, terse method
         ##    that computes only the upper triangle
         ##    if this is a bottleneck, could rewrite in Rcpp ...
+		  ## Steve: For loop over all delta but I guess it would be much slower?
 	P_mat <- outer(rel_haz, risk_set, "/")
 	P_mat[upper.tri(P_mat)] <- 0
 	nll <- 1/N * (t(X) %*% (delta - P_mat %*% delta))

@@ -33,6 +33,10 @@ pencox.Rout: pencox.R
 ### CV but still trying to figure out the objective function
 cv.pencox.Rout: cv.pencox.R
 
+### Inference functions
+### Cummulative hazard and baseline hazard
+cumhaz.pencox.Rout: cumhaz.pencox.R
+
 ### Plot coefficient estimates
 plot.pencox.Rout: plot.pencox.R
 
