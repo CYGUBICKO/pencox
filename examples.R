@@ -58,7 +58,6 @@ lines(timevar, haz_df$survestimate, type = "s", col = "red")
 plot(coxsurv, fun = "cumhaz")
 lines(timevar, haz_df$cumhazard, type = "s", col = "red")
 
-quit()
 ## CV
 lambda <- exp(seq(0, -7, length.out = 100))
 cv.pencox_res <- cv.pencox(eventvar, X, gamma = 0.1, alpha = 1, lambda = lambda, standardise = TRUE)
@@ -66,6 +65,7 @@ cv.pencox_res <- cv.pencox(eventvar, X, gamma = 0.1, alpha = 1, lambda = lambda,
 # Plot coefficients
 plot.pencox(cv.pencox_res)
 
+quit()
 ## glmnet
 timevar <- df$time
 y <- Surv(time = timevar, event = eventvar)
