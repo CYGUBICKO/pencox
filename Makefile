@@ -46,6 +46,8 @@ pencox.pdf: pencox.rmd
 ### Example
 examples.Rout: examples.R
 
+## Trying coordinate descent 
+coordinateD.Rout: coordinateD.R
 
 ######################################################################
 
